@@ -1,9 +1,7 @@
 package main
 
 import (
-	"bytes"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"log"
 	"net/http"
@@ -15,33 +13,6 @@ import (
 
 type Block struct {
 	Id string `json:"id"`
-}
-
-func sendRequest(method string, url string, data interface{}, headers map[string]string) (*http.Response, error) {
-	jsonData, err := json.Marshal(data)
-	if err != nil {
-		log.Fatal(err)
-		return nil, errors.New("error in marshalling data")
-	}
-
-	req, err := http.NewRequest(method, url, bytes.NewBuffer(jsonData))
-	if err != nil {
-		log.Fatal(err)
-		return nil, errors.New("error in creating request")
-	}
-
-	for k, v := range headers {
-		req.Header.Add(k, v)
-	}
-
-	client := &http.Client{}
-	res, err := client.Do(req)
-	if err != nil {
-		log.Fatal(err)
-		return nil, errors.New("error in sending request")
-	}
-
-	return res, nil
 }
 
 func Ping(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
@@ -56,7 +27,7 @@ func Daily(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		"X-Requested-With": "XMLHttpRequest",
 		"Authorization":    "Bearer " + os.Getenv("API_TOKEN"),
 	}
-	data, err := sendRequest("POST", url, nil, headers)
+	data, err := SendRequest("POST", url, nil, headers)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -71,11 +42,11 @@ func Daily(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	fmt.Println(blocks[0].Id)
 	blockId := blocks[0].Id
 
-	loc, err := time.LoadLocation("Asia/Seoul")
+	now, err := TimeIn(time.Now(), "Asia/Seoul")
 	if err != nil {
 		log.Fatal(err)
 	}
-	now := time.Now().In(loc)
+
 	title := now.Format("Monday, 02/01/2006")
 
 	url = fmt.Sprintf("%s/boards/%s/blocks/%s", os.Getenv("BASE_URL"), os.Getenv("BOARD_ID"), blockId)
@@ -104,7 +75,7 @@ func Daily(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		log.Fatal(err)
 	}
 
-	data, err = sendRequest("PATCH", url, payload, headers)
+	data, err = SendRequest("PATCH", url, payload, headers)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -138,7 +109,7 @@ func Reminder(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 
 	}
 
-	data, err := sendRequest("POST", os.Getenv("WEBHOOK"), payload, headers)
+	data, err := SendRequest("POST", os.Getenv("WEBHOOK"), payload, headers)
 	if err != nil {
 		log.Fatal(err)
 	}
