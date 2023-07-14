@@ -39,7 +39,6 @@ func Daily(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		log.Fatal(err)
 	}
 
-	fmt.Println(blocks[0].Id)
 	blockId := blocks[0].Id
 
 	now, err := TimeIn(time.Now(), "Asia/Seoul")
@@ -54,7 +53,7 @@ func Daily(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		"title": title,
 		"updatedFields": map[string]interface{}{
 			"properties": map[string]interface{}{
-				"a39x5cybshwrbjpc3juaakcyj6e": fmt.Sprintf(`{"from": %d}`, now.Unix()*1000),
+				"a39x5cybshwrbjpc3juaakcyj6e": fmt.Sprintf(`{"from": %d}`, now.UnixMilli()),
 				"ae9ar615xoknd8hw8py7mbyr7zo": "a1wj1kupmcnx3qbyqsdkyhkbzgr",
 				"ao44fz8nf6z6tuj1x31t9yyehcc": []string{
 					"ppmdhd5y138zbpqb3ocwy3r7rc",
