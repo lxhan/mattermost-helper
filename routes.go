@@ -66,6 +66,7 @@ func Daily(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 					"pxeg7pzkupgg3pohu58n473zqa",
 					"yo5gpm4kotyqfp3t7eggzusfyr",
 					"boqnot1rr7gb5nuusfephm9jzh",
+					"swq7fiex47bp9xqa3erapmo1xr",
 				},
 			},
 		},
