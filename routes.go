@@ -53,7 +53,7 @@ func Daily(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		"title": title,
 		"updatedFields": map[string]interface{}{
 			"properties": map[string]interface{}{
-				"a39x5cybshwrbjpc3juaakcyj6e": fmt.Sprintf(`{"from": %d}`, now.UnixMilli()),
+				"a39x5cybshwrbjpc3juaakcyj6e": fmt.Sprintf(`{"from": %d}`, time.Now().In(time.FixedZone("UTC+9", 9*60*60)).UnixMilli()),
 				"ae9ar615xoknd8hw8py7mbyr7zo": "a1wj1kupmcnx3qbyqsdkyhkbzgr",
 				"ao44fz8nf6z6tuj1x31t9yyehcc": []string{
 					"ppmdhd5y138zbpqb3ocwy3r7rc",
@@ -67,10 +67,12 @@ func Daily(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 					"yo5gpm4kotyqfp3t7eggzusfyr",
 					"boqnot1rr7gb5nuusfephm9jzh",
 					"swq7fiex47bp9xqa3erapmo1xr",
+					"k8atjer9bfdyupugrbd63ucwkw",
 				},
 			},
 		},
 	}
+
 	if err != nil {
 		log.Fatal(err)
 	}
