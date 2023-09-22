@@ -41,10 +41,7 @@ func Daily(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 	blockId := blocks[0].Id
 
-	now, err := TimeIn(time.Now(), "Asia/Seoul")
-	if err != nil {
-		log.Fatal(err)
-	}
+	now := time.Now()
 
 	title := now.Format("Monday, 02/01/2006")
 
@@ -53,7 +50,7 @@ func Daily(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		"title": title,
 		"updatedFields": map[string]interface{}{
 			"properties": map[string]interface{}{
-				"a39x5cybshwrbjpc3juaakcyj6e": fmt.Sprintf(`{"from": %d}`, time.Now().In(time.FixedZone("UTC+9", 9*60*60)).UnixMilli()),
+				"a39x5cybshwrbjpc3juaakcyj6e": fmt.Sprintf(`{"from": %d}`, now.UnixMilli()),
 				"ae9ar615xoknd8hw8py7mbyr7zo": "a1wj1kupmcnx3qbyqsdkyhkbzgr",
 				"ao44fz8nf6z6tuj1x31t9yyehcc": []string{
 					"ppmdhd5y138zbpqb3ocwy3r7rc",
@@ -97,9 +94,8 @@ func Reminder(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	case "report":
 		payload = map[string]string{
 			"text": fmt.Sprintf(
-				`@channel Don't forget to fill out the [Daily Report](%s) before the [1 PM KST meeting](%s).`,
+				`@channel Don't forget to fill out the [Daily Report](%s).`,
 				os.Getenv("BOARD_URL"),
-				os.Getenv("ZOOM"),
 			),
 		}
 	case "zoom":
