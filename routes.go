@@ -41,7 +41,10 @@ func Daily(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 	blockId := blocks[0].Id
 
-	now := time.Now()
+	now, err := TimeIn(time.Now(), "Asia/Seoul")
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	title := now.Format("Monday, 02/01/2006")
 
