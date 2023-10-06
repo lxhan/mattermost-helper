@@ -58,7 +58,6 @@ func Daily(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 				"ao44fz8nf6z6tuj1x31t9yyehcc": []string{
 					"ppmdhd5y138zbpqb3ocwy3r7rc",
 					"cqmg9gu3ptyadk31s8wrdxhtsa",
-					"rw4cxgm1qpgmzd5ts78dgts38e",
 					"3wid7xjx73y63ct3wh3k61ot6w",
 					"11ei69wt47fz9kg4rypwx4drse",
 					"1jtucy8b7pfu7btahd3k141bgc",
