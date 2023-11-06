@@ -59,7 +59,6 @@ func Daily(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 					"ppmdhd5y138zbpqb3ocwy3r7rc",
 					"cqmg9gu3ptyadk31s8wrdxhtsa",
 					"3wid7xjx73y63ct3wh3k61ot6w",
-					"11ei69wt47fz9kg4rypwx4drse",
 					"1jtucy8b7pfu7btahd3k141bgc",
 					"51q6synw3jfduxeehd5bofbb7o",
 					"pxeg7pzkupgg3pohu58n473zqa",
@@ -67,6 +66,7 @@ func Daily(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 					"boqnot1rr7gb5nuusfephm9jzh",
 					"swq7fiex47bp9xqa3erapmo1xr",
 					"k8atjer9bfdyupugrbd63ucwkw",
+					"suu8ucwuxbn3dn7gtwjy8oz7dy",
 				},
 			},
 		},
@@ -98,7 +98,7 @@ func Reminder(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 			"text": fmt.Sprintf(
 				`@channel Don't forget to fill out the [Daily Report](%s) before the [1PM KST meeting](%s).`,
 				os.Getenv("BOARD_URL"),
-        os.Getenv("ZOOM"),
+				os.Getenv("ZOOM"),
 			),
 		}
 	case "zoom":
