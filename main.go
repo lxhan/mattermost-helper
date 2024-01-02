@@ -18,7 +18,9 @@ func main() {
 
 	router.GET("/ping", Ping)
 	router.GET("/daily", Daily)
+	router.GET("/daily-pt", DailyPT)
 	router.GET("/reminder/:type", Reminder)
+	router.GET("/reminder-pt/:type", ReminderPT)
 
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
