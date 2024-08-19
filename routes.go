@@ -41,10 +41,11 @@ func Daily(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 	blockId := blocks[0].Id
 
-	now, err := TimeIn(time.Now(), "Asia/Seoul")
-	if err != nil {
-		log.Fatal(err)
-	}
+	// now, err := TimeIn(time.Now(), "Asia/Seoul")
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	now := time.Now()
 
 	title := now.Format("Monday, 02/01/2006")
 
@@ -53,7 +54,7 @@ func Daily(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		"title": title,
 		"updatedFields": map[string]interface{}{
 			"properties": map[string]interface{}{
-				"a39x5cybshwrbjpc3juaakcyj6e": fmt.Sprintf(`{"from": %d}`, time.Now().UnixMilli()),
+				"a39x5cybshwrbjpc3juaakcyj6e": fmt.Sprintf(`{"from": %d}`, now.UnixMilli()),
 				"ae9ar615xoknd8hw8py7mbyr7zo": "a1wj1kupmcnx3qbyqsdkyhkbzgr",
 			},
 		},
