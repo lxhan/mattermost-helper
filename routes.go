@@ -83,7 +83,7 @@ func Reminder(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	case "report":
 		payload = map[string]string{
 			"text": fmt.Sprintf(
-				`@channel Don't forget to fill out the [Daily Report](%s) before the [1PM KST meeting](%s).`,
+				`@channel Don't forget to fill out the [Daily Report](%s) before the [11AM KST meeting](%s).`,
 				os.Getenv("BOARD_URL"),
 				os.Getenv("ZOOM"),
 			),
