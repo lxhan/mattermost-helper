@@ -48,12 +48,17 @@ func Daily(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 	title := now.Format("Monday, 02/01/2006")
 
+	loc, _ := time.LoadLocation("Asia/Seoul")
+	nowKST := time.Now().UTC().In(loc)
+	nowUTC := nowKST.UTC()
+	unixMillis := nowUTC.UnixMilli()
+
 	url = fmt.Sprintf("%s/boards/%s/blocks/%s", os.Getenv("BASE_URL"), os.Getenv("BOARD_ID"), blockId)
 	payload := map[string]interface{}{
 		"title": title,
 		"updatedFields": map[string]interface{}{
 			"properties": map[string]interface{}{
-				"a39x5cybshwrbjpc3juaakcyj6e": fmt.Sprintf(`{"from": %d}`, now.UnixMilli()),
+				"a39x5cybshwrbjpc3juaakcyj6e": fmt.Sprintf(`{"from": %d}`, unixMillis),
 				"ae9ar615xoknd8hw8py7mbyr7zo": "a1wj1kupmcnx3qbyqsdkyhkbzgr",
 			},
 		},
